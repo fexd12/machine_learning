@@ -11,7 +11,7 @@ def nb_credit_main():
     classificador.fit(previsor_treinamento,classe_treinamento)
     resultado = classificador.predict(previsor_teste)
 
-    accuracy = accuracy_score(classe_teste,resultado)
-    # matriz = confusion_matrix(classe_teste,resultado)
+    accuracy = accuracy_score(classe_teste,resultado) # porcetagem de acertos
+    # matriz = confusion_matrix(classe_teste,resultado) # saber quantos acertos e erros 
 
     print(accuracy)
