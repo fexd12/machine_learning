@@ -32,6 +32,7 @@ def pre_process_census():
     scaler = StandardScaler() # fazer escalonamento de dados 
     previsor = scaler.fit_transform(previsor)
 
-    previsor_treinamento, previsor_teste, classe_treinamento, classe_teste = train_test_split(previsor,classe,test_size=0.15,random_state=0)
+    # previsor_treinamento, previsor_teste, classe_treinamento, classe_teste = train_test_split(previsor,classe,test_size=0.15,random_state=0)
     
-    return previsor_treinamento, previsor_teste, classe_treinamento, classe_teste
+    # return previsor_treinamento, previsor_teste, classe_treinamento, classe_teste
+    return previsor,classe

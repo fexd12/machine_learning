@@ -27,6 +27,8 @@ def pre_process_credit():
     scaler_previsor = StandardScaler() # manter mesma grandeza
     previsor = scaler_previsor.fit_transform(previsor)
 
-    previsor_treinamento, previsor_teste, classe_treinamento, classe_teste = train_test_split(previsor,classe,test_size=0.25,random_state=0)
+    # previsor_treinamento, previsor_teste, classe_treinamento, classe_teste = train_test_split(previsor,classe,test_size=0.25,random_state=0)
 
-    return previsor_treinamento, previsor_teste, classe_treinamento, classe_teste
+    # return previsor_treinamento, previsor_teste, classe_treinamento, classe_teste
+
+    return previsor,classe

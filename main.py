@@ -13,17 +13,17 @@ from random_forest.rf_census import rf_census_main
 from svm.svm_credit import svm_credit_main
 from svm.svm_census import svm_census_main
 
-# nb_risco_main()
-# nb_credit_main()
-# nb_census_main()
+def writeLines(text):
+    with open('testes_prob.csv','a+') as f:
+        f.write(text.replace('.',','))
+    f.close()
 
-# ad_risco_main()
-# ad_credit_main()
-# ad_census_main()
-
-# rf_risco_main()
-# rf_credit_main()
-# rf_census_main()
-
-svm_credit_main()
-svm_census_main()
+for i in range(31):
+    
+    text = str(nb_credit_main(i)) + ';' + str(ad_credit_main(i)) + ';' + str(rf_credit_main(i)) + ';' + str(svm_credit_main(i)) + '\n' if i !=0 else \
+        'NaiveBays' + ';' + 'ArvoredeDecisao' + ';' + 'RandomForest' + ';' + 'SVM' + '\n'
+    writeLines(text)
+    
+    # nb_risco_main() + ad_risco_main() + rf_risco_main()
+    
+    # nb_census_main() +  ad_census_main() + rf_census_main() + svm_census_main()

@@ -1,17 +1,29 @@
 from pre_process.pre_process_credit import pre_process_credit
 from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix,accuracy_score
+from sklearn.model_selection import StratifiedKFold
 
-def nb_credit_main():
+import numpy as np
 
-    previsor_treinamento, previsor_teste, classe_treinamento, classe_teste = pre_process_credit()
+def nb_credit_main(seed=0):
+
+    previsor, classe = pre_process_credit()
 
 
-    classificador = GaussianNB()
-    classificador.fit(previsor_treinamento,classe_treinamento)
-    resultado = classificador.predict(previsor_teste)
+    kfold = StratifiedKFold(n_splits=10,shuffle=True,random_state=seed)
+    resultado1 = []
 
-    accuracy = accuracy_score(classe_teste,resultado) # porcetagem de acertos
-    # matriz = confusion_matrix(classe_teste,resultado) # saber quantos acertos e erros 
+    for indice_treinamento,indice_teste in kfold.split(previsor,np.zeros(shape=(previsor.shape[0],1))):
 
-    print(accuracy)
+        classificador = GaussianNB()
+        classificador.fit(previsor[indice_treinamento],classe[indice_treinamento])
+        # export_graphviz(   decision_tree = classificador,
+        #                    out_file = 'arvore_risco.dot',
+        #                    feature_names = ['historia', 'divida', 'garantias', 'renda'],
+        #                    class_names = ['alto','moderado','baixo'],
+        #                    filled = True,
+        #                    leaves_parallel=True) # exportar arvore para visualizacao,app graphviz
+        resultado = classificador.predict(previsor[indice_teste])
+        resultado1.append(accuracy_score(classe[indice_teste],resultado))
+    
+    return np.asfarray(resultado1).mean()
